@@ -1,0 +1,7 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t subodh15/dockerapp:latest -f Dockerfile.dev .
+script:
+  docker run subodh15/dockerapp:latest -e CI=true npm run test 
