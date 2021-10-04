@@ -5,3 +5,15 @@ before_install:
   - docker build -t subodh15/dockerapp:latest -f Dockerfile.dev .
 script:
   - docker run subodh15/dockerapp:latest -e CI=true npm run test 
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app: "docker"
+  env: "Docker-env"
+  bucketname: "elasticbeanstalk-ap-south-1-623529163241"
+  bucket-path: "docker"
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
